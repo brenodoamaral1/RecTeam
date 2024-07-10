@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#F9F9F9',
+    backgroundColor: 'white',
   },
   menuText: {
     fontSize: 20,
