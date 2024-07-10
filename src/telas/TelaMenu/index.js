@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function App() {
+export default function TelaMenu() {
   const [appIsReady, setAppIsReady] = useState(true);
   const [selectedButton, setSelectedButton] = useState(null); 
   const [submenuContent, setSubmenuContent] = useState([]);
