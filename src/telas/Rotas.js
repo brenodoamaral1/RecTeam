@@ -13,9 +13,10 @@ import TresBarrasVermelho from '../imagens/navbar/tresBarrasVermelho.svg';
 import TresBarrasBranco from '../imagens/navbar/tresBarrasBranco.svg';
 
 // arquivos das telas
-import TelaHome from './TelaHome';
+import TelaMenu from './TelaMenu';
 import TelaMissoes from './TelaMissoes';
 import TelaPontos from './TelaPontos';
+import TelaInsignias from './TelaInsignias';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -101,7 +102,7 @@ const TabNavigator = () => {
             Icon = focused ? TrofeuVermelho : TrofeuBranco;
             iconStyle = styles.iconPontos;
             title = "Pontos";
-          } else if (route.name === 'TelaHome') {
+          } else if (route.name === 'TelaMenu') {
             Icon = focused ? TresBarrasVermelho : TresBarrasBranco;
             iconStyle = styles.iconHome;
             title = "Menu";
@@ -122,6 +123,17 @@ const TabNavigator = () => {
       })}
     >
       <Tab.Screen
+        name="TelaInsignias"
+        component={TelaInsignias}
+        options={{
+          title: '',
+          headerTransparent: true,
+          headerShown: false,
+          tabBarIcon: () => (null),
+          tabBarButton: () => null
+        }}
+      />
+      <Tab.Screen
         name="TelaMissoes"
         component={TelaMissoes}
         options={{
@@ -140,8 +152,8 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="TelaHome"
-        component={TelaHome}
+        name="TelaMenu"
+        component={TelaMenu}
         options={{
           title: '',
           headerTransparent: true,
