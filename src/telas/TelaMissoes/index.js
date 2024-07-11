@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity } from "react-native";
+import React, { useState, useRef } from "react";
+import { StyleSheet, View, Text, ScrollView, Image, TextInput, KeyboardAvoidingView, TouchableOpacity, Platform } from "react-native";
 import CustomCheckbox from '../../componentes/SquareCheckbox';
 import CircleCheckbox from "../../componentes/CircleCheckbox";
 import Woman from '../../imagens/missoes/woman.jpg';
@@ -10,24 +10,53 @@ export default function TelaMissoes() {
     const [isVerifying, setIsVerifying] = useState(false);
     const [code, setCode] = useState("");
     const [isCodeSent, setIsCodeSent] = useState(false);
-    const [isQRCodeScanned, setIsQRCodeScanned] = useState(false); // Novo estado para QR Code
+    const [isCodeSent2, setIsCodeSent2] = useState(false);
+    const [isQRCodeScanned, setIsQRCodeScanned] = useState(false); 
     const [isDailyChecked, setIsDailyChecked] = useState(false);
-    const [showDailyMissions, setShowDailyMissions] = useState(true); // Novo estado para alternar entre missões diárias e semanais
+    const [showDailyMissions, setShowDailyMissions] = useState(true); 
+    const dailyCodeInputRef = useRef(null);
     const [tasks, setTasks] = useState([
-        { id: 1, text: "Faça login no app diariamente", completed: false, imageSent: false },
-        { id: 2, text: "Responda a uma pesquisa", completed: false, imageSent: false },
-        { id: 3, text: "Compartilhe o app nas redes", completed: false, imageSent: false }
+        { id: 1, text: "Faça login no app diariamente", completed: false, imageSent: false, size: 3},
+        { id: 2, text: "Responda a uma pesquisa", completed: false, imageSent: false, size: 2},
+        { id: 3, text: "Compartilhe o app nas redes", completed: false, imageSent: false, size: 2},
+        { id: 4, text: "Pesquisa de Preferências de Compra", completed: false, imageSent: false, size: 2},
+        { id: 5, text: "Pesquisa de Preferências por Recompensas", completed: false, imageSent: false, size: 2},
+        { id: 6, text: "Pesquisa de Satisfação com Lojas", completed: false, imageSent: false, size: 2}
     ]);
     const [weeklyTasks, setWeeklyTasks] = useState([
-        { id: 1, text: "Visite o Shopping 3 vezes na semana", completed: false, imageSent: false },
-        { id: 2, text: "Compre em qualquer loja participante", completed: false, imageSent: false },
-        { id: 3, text: "Convide um amigo para se inscrever no Viva ", completed: false, imageSent: false }
+        { id: 1, text: "Visite o Shopping 3 vezes na semana", completed: false, imageSent: false, size: 1},
+        { id: 2, text: "Compre em qualquer loja participante", completed: false, imageSent: false, size: 2},
+        { id: 3, text: "Convide um amigo para se inscrever no Viva ", completed: false, imageSent: false, size: 2},
+        { id: 4, text: "Pesquisa de Preferências de Compra", completed: false, imageSent: false, size: 2},
+        { id: 5, text: "Pesquisa de Preferências por Recompensas", completed: false, imageSent: false, size: 2},
+        { id: 6, text: "Pesquisa de Satisfação com Lojas", completed: false, imageSent: false }
+    ]);
+
+    const [weeklyPoints, setWeeklyPoints] = useState([
+        { id: 1, text: "+5"},
+        { id: 2, text: "+15"},
+        { id: 3, text: "+25"},
+        { id: 4, text: "+10"},
+        { id: 5, text: "+10"},
+        { id: 6, text: "+10"}
+    ]);
+
+    const [dailyPoints, setDailyPoints] = useState([
+        { id: 1, text: "+100"},
+        { id: 2, text: "+50"},
+        { id: 3, text: "+30"},
+        { id: 4, text: "+10"},
+        { id: 5, text: "+10"},
+        { id: 6, text: "+10"}
     ]);
     const [dailyCode, setDailyCode] = useState("");
 
     const handleSendCode = () => {
         setIsVerifying(false);
         setIsCodeSent(true);
+    };
+    const handleSendCode2 = () => {
+        setIsCodeSent2(true);
     };
 
     const handleQRCodeScan = () => {
@@ -36,7 +65,7 @@ export default function TelaMissoes() {
     };
 
     const handleImageSend = (task) => {
-        task.imageSent = true;
+        task.completed = true;
         setTasks([...tasks]);
         setWeeklyTasks([...weeklyTasks]);
     };
@@ -49,11 +78,16 @@ export default function TelaMissoes() {
         }
     };
 
-    const handleDailyCodeSend = () => {
-        setDailyCode("");
+    const focusDailyCodeInput = () => {
+        dailyCodeInputRef.current?.focus();
     };
-
+    
     return (
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+        >
+        <ScrollView>
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.title}>MISSÕES</Text>
@@ -96,7 +130,7 @@ export default function TelaMissoes() {
                                     <TouchableOpacity style={styles.verifyButton} onPress={() => setIsVerifying(true)}>
                                         <Text style={styles.verifyButtonText}>Verificar</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={styles.qrcodeButton} onPress={handleQRCodeScan}>
+                                    <TouchableOpacity style={styles.qrcodeButton} onPress={handleQRCodeScan} >
                                         <QrCode width="20" height="20" />
                                     </TouchableOpacity>
                                 </View>
@@ -126,50 +160,120 @@ export default function TelaMissoes() {
                 </View>
 
                 {showDailyMissions ? (
-                    tasks.map((task) => (
-                        <View key={task.id} style={styles.taskContainer}>
-                            <View style={styles.taskContent}>
-                                <CustomCheckbox isChecked={task.completed} onPress={() => handleTaskCheck(task)} />
-                                <Text style={styles.taskText}>{task.text}</Text>
-                                {!task.imageSent && (
-                                    <TouchableOpacity style = {styles.iconPosition} onPress={() => handleImageSend(task)}>
-                                        <Camera style={styles.cameraIcon}/>
-                                    </TouchableOpacity>
-                                )}
-                            </View>
-                            <View style={styles.lineView} />
-                        </View>
-                    ))
+                        <>
+                            {tasks.slice(0, 3).map((task) => (
+                                <View key={task.id} style={styles.taskContainer}>
+                                    <View style={styles.taskContent}>
+                                        <CustomCheckbox isChecked={task.completed} onPress={() => handleTaskCheck(task)} />
+                                        <Text style={styles.taskText}>{task.text}</Text>
+                                        {!task.imageSent && (
+                                            <>
+                                            <Text style={[styles.pointsText, { left: task.size === 3 ? 272 : 280 }]}>
+                                                {dailyPoints.find((point) => point.id === task.id)?.text}
+                                            </Text>
+                                            <View style={styles.iconPosition}>
+                                                
+                                                <TouchableOpacity onPress={() => handleImageSend(task)}>
+                                                    <Camera style={styles.cameraIcon} />
+                                                </TouchableOpacity>
+                                            </View>
+                                            </>
+                                        )}
+                                    </View>
+                                    <View style={styles.lineView} />
+                                </View>
+                            ))}
+                            <Text style={styles.searchTasks}>Responda às pesquisas</Text>
+                            {tasks.slice(3).map((task) => (
+                                <View key={task.id} style={styles.taskContainer}>
+                                    <View style={styles.taskContent}>
+                                        <CustomCheckbox isChecked={task.completed} onPress={() => handleTaskCheck(task)} />
+                                        <Text style={styles.taskText}>{task.text}</Text>
+                                        {!task.imageSent && (
+                                            <>
+                                            <Text style={styles.pointsText}>{dailyPoints.find((point) => point.id === task.id)?.text}</Text>
+                                            <View style={styles.iconPosition}>
+                                                
+                                                <TouchableOpacity onPress={() => handleImageSend(task)}>
+                                                    <Camera style={styles.cameraIcon} />
+                                                </TouchableOpacity>
+                                            </View>
+                                            </>
+                                        )}
+                                    </View>
+                                    <View style={styles.lineView} />
+                                </View>
+                            ))}
+                        </>
                 ) : (
-                    weeklyTasks.map((task) => (
-                        <View key={task.id} style={styles.taskContainer}>
-                            <View style={styles.taskContent}>
-                                <CustomCheckbox isChecked={task.completed} onPress={() => handleTaskCheck(task)} />
-                                <Text style={styles.taskText}>{task.text}</Text>
-                                {!task.imageSent && (
-                                    <TouchableOpacity style = {styles.iconPosition} onPress={() => handleImageSend(task)}>
-                                        <Camera style={styles.cameraIcon}/>
-                                    </TouchableOpacity>
-                                )}
-                            </View>
-                            <View style={styles.lineView} />
-                        </View>
-                    ))
+                        <>
+                            {weeklyTasks.slice(0, 3).map((task) => (
+                                <View key={task.id} style={styles.taskContainer}>
+                                    <View style={styles.taskContent}>
+                                        <CustomCheckbox isChecked={task.completed} onPress={() => handleTaskCheck(task)} />
+                                        <Text style={styles.taskText}>{task.text}</Text>
+                                        {!task.imageSent && (
+                                            <>
+                                            <Text style={[styles.pointsText, { left: task.size === 1 ? 287 : 280 }]}>
+                                                {weeklyPoints.find((point) => point.id === task.id)?.text}
+                                            </Text>
+                                            <View style={styles.iconPosition}>
+                                                <TouchableOpacity onPress={() => handleImageSend(task)}>
+                                                    <Camera style={styles.cameraIcon} />
+                                                </TouchableOpacity>
+                                            </View>
+                                            </>
+                                        )}
+                                    </View>
+                                    <View style={styles.lineView} />
+                                </View>
+                            ))}
+                            <Text style={styles.searchTasks}>Responda às pesquisas</Text>
+                            {weeklyTasks.slice(3).map((task) => (
+                                <View key={task.id} style={styles.taskContainer}>
+                                    <View style={styles.taskContent}>
+                                        <CustomCheckbox isChecked={task.completed} onPress={() => handleTaskCheck(task)} />
+                                        <Text style={styles.taskText}>{task.text}</Text>
+                                        {!task.imageSent && (
+                                            <>
+                                            <Text style={styles.pointsText}>{weeklyPoints.find((point) => point.id === task.id)?.text}</Text>
+                                            <View style={styles.iconPosition}>
+                                                <TouchableOpacity onPress={() => handleImageSend(task)}>
+                                                    <Camera style={styles.cameraIcon} />
+                                                </TouchableOpacity>
+                                            </View>
+                                            </>
+                                        )}
+                                    </View>
+                                    <View style={styles.lineView} />
+                                </View>
+                            ))}
+                        </>
                 )}
-
-                <View style={styles.dailyCodeContainer}>
+                
+            </View>
+            <View style={styles.dailyCodeContainer}>
+                <Text style={styles.dailyCodeTitle}>#vemdeviva</Text>
+                <Text style={styles.dailyCodeDescription}>Insira o código de indicação e reivindique seu prêmio</Text>
+                {isCodeSent2 ? (
+                        <Text style={styles.codeSentMessage}>Código enviado com sucesso!</Text>
+                    ) : (
+                    <>
                     <TextInput
                         style={styles.dailyCodeInput}
-                        placeholder="Insira o código"
                         value={dailyCode}
                         onChangeText={setDailyCode}
+                        onFocus={focusDailyCodeInput}
                     />
-                    <TouchableOpacity style={styles.sendButton} onPress={handleDailyCodeSend}>
+                    <TouchableOpacity style={styles.sendButton} onPress={handleSendCode2}>
                         <Text style={styles.sendButtonText}>Enviar</Text>
                     </TouchableOpacity>
-                </View>
+                    </>
+                )}
             </View>
         </View>
+        </ScrollView>
+        </KeyboardAvoidingView>
     );
 }
 
@@ -187,27 +291,26 @@ const styles = StyleSheet.create({
     textoImagem: {
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: 15,
+        marginBottom: 10,
         gap: 25
     },
     comprimento: {
         flexDirection: "column",
     },
     headerImage: {
-        width: 91,
-        height: 91,
+        width: 75,
+        height: 75,
         borderRadius: 45.5,
         borderWidth: 2,  
         borderColor: 'white'
     },
     shadowContainer: {
+        paddingTop: 8,
         marginLeft: 110,
         marginRight: 30,
         width: 91,
         height: 91,
         borderRadius: 45.5,
-        marginLeft: 110,
-        marginRight: 30,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -248,7 +351,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: "#FED131",
         borderRadius: 10,
-        padding: 12,
+        padding: 10,
         marginBottom: 20,
         marginLeft: 20,
         marginRight: 20,
@@ -387,12 +490,12 @@ const styles = StyleSheet.create({
         color: "rgba(94, 94, 94, 0.61)",  
     },
     activeSectionTitleRed: {
-        fontSize: 18,
+        fontSize: 17,
         color: "#e24443",
         fontWeight: "700"
     },
     activeSectionTitleBlue: {
-        fontSize: 18,
+        fontSize: 17,
         color: "#004d85",
         fontWeight: "700"
     },
@@ -434,6 +537,17 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 1
     },
+    searchTasks: {
+        fontSize: 16,
+        fontWeight: "500",
+        color: "#3c3a3a",
+        textAlign: "center",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 6,
+        marginBottom: 15
+    },
     iconPosition: {
         position: 'absolute',
         zIndex: 1,
@@ -443,18 +557,49 @@ const styles = StyleSheet.create({
         width: 27,
         height: 27,
     },
+    pointsText: {
+        position: 'absolute',
+        left: 280,
+        fontSize: 16,
+        color: '#E24443',
+        fontWeight: 'bold'
+    },
     dailyCodeContainer: {
-        flexDirection: "row",
+        padding: 20,
+        backgroundColor: "#B1B1B1",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 20,
+        paddingTop: 20,
+        gap: 15
     },
     dailyCodeInput: {
-        borderColor: "#e24443",
-        borderWidth: 1,
+        flex: 1,
+        height: 40,
         borderRadius: 5,
-        padding: 10,
+        backgroundColor: '#f3f3f3',
+        fontSize: 12, 
+        backgroundColor: "white",
         marginRight: 10,
-        width: 200,
+        width: 220,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowRadius: 4,
+        elevation: 4,
+        shadowOpacity: 0.2,
     },
+    dailyCodeTitle: {
+        fontSize: 24,
+        fontWeight: "700",
+        color: "#fe3131",
+        textAlign: "center",
+    },
+    dailyCodeDescription: {
+        width: 219,
+        fontSize: 16,
+        color: "#fff",
+        textAlign: "center",
+    }
 });
