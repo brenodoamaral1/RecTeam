@@ -59,6 +59,15 @@ export default function TelaPontos() {
 
       <View style={styles.balanceSection}>
         <Text style={styles.balanceTitle}>Você tem: R$0,00</Text>
+        <View
+              style={{
+                borderBottomColor: '#54AE70',
+                borderBottomWidth: 1,
+                marginBottom: 20,
+                alignSelf: 'stretch',
+                marginHorizontal: -20,
+              }}
+        />
         <View style={styles.balanceDetails}>
           <View>
             <Text style={styles.balanceItem}>Supercashback</Text>
@@ -110,33 +119,120 @@ export default function TelaPontos() {
       <View style={styles.toggleSection}>
         <TouchableOpacity onPress={() => setShowRanking(true)}>
           <Text style={[styles.toggleText, showRanking && styles.activeToggleText]}>Ranking</Text>
+          {showRanking && <View style={styles.activeToggleUnderline}></View>}
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setShowRanking(false)}>
           <Text style={[styles.toggleText, !showRanking && styles.activeToggleText]}>Atividades</Text>
           <Text style={[styles.toggleText, !showRanking && styles.activeToggleText]}>Realizadas</Text>
+          {!showRanking && <View style={styles.activeToggleUnderline}></View>}
         </TouchableOpacity>
       </View>
 
       {showRanking ? (
         <View style={styles.content}>
-          <View style={styles.rankingItem}>
+          <View style={{flexDirection: 'row', gap: 6, justifyContent: 'center', alignItems: 'center', marginBottom: 40,}}>
             <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.rankingImage} />
-            <Text style={styles.rankingText}>1º Você - 500 pontos - Nível 1</Text>
+            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.rankingImageMiddle} />
+            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.rankingImage} />
           </View>
           <View style={styles.rankingItem}>
-            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.rankingImage} />
-            <Text style={styles.rankingText}>2º Gabriela - 450 pontos - Nível 1</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center',}}>
+            <Text style={styles.rankingNumber}>1</Text>
+            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.rankingImageList} />
+            <Text style={styles.rankingName}>Você</Text>
+            </View>
+            <View>
+              <Text style={styles.pointsLevel}>500 Pontos</Text>
+              <Text style={[styles.pointsLevel, {color: '#E24443'}]}>Nível 1</Text>
+            </View>
           </View>
+          <View
+              style={{
+                borderBottomColor: 'rgba(94,94,94,0.3)',
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                marginBottom: 10,
+              }}
+            />
           <View style={styles.rankingItem}>
-            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.rankingImage} />
-            <Text style={styles.rankingText}>3º Gustavo - 300 pontos - Nível 1</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center',}}>
+            <Text style={styles.rankingNumber}>2</Text>
+            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.rankingImageList} />
+            <Text style={styles.rankingName}>Gabriela</Text>
+            </View>
+           
+            <View>
+              <Text style={styles.pointsLevel}>450 Pontos</Text>
+              <Text style={[styles.pointsLevel, {color: '#E24443'}]}>Nível 1</Text>
+            </View>
           </View>
+          <View
+              style={{
+                borderBottomColor: 'rgba(94,94,94,0.3)',
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                marginBottom: 10,
+              }}
+            />
+          <View style={styles.rankingItem}>
+            <View style={{flexDirection: 'row', alignItems: 'center',}}>
+            <Text style={styles.rankingNumber}>3</Text>
+            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.rankingImageList} />
+            <Text style={styles.rankingName}>Gustavo</Text>
+            </View>
+            <View>
+              <Text style={styles.pointsLevel}>300 Pontos</Text>
+              <Text style={[styles.pointsLevel, {color: '#E24443'}]}>Nível 1</Text>
+            </View>
+          </View>
+          <TouchableOpacity style={[styles.moreButton]}>
+            <Text style={styles.extractButtonText}>ver extrato</Text>
+          </TouchableOpacity>
         </View>
       ) : (
-        <View style={styles.content}>
-          <Text style={styles.activityText}>09/07 - Visitou o shopping +70 pontos</Text>
-          <Text style={styles.activityText}>08/07 - Compartilhou a app com um amigo +25 pontos</Text>
-          <Text style={styles.activityText}>08/07 - Foi ao cinema com um amigo +50 pontos</Text>
+        <View style={styles.activityContent}>
+          <View style={styles.activityContainer}>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.activityDate}>09/07</Text>
+              <Text style={styles.activityText}>Visitou o shopping</Text>
+            </View>           
+            <View>
+              <Text style={styles.activityPoints}>+70</Text>
+            </View>
+          </View>
+          <View
+              style={{
+                borderBottomColor: 'rgba(94,94,94,0.3)',
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                marginBottom: 10,
+              }}
+            />
+          <View style={styles.activityContainer}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={styles.activityDate}>08/07</Text>
+              <Text style={styles.activityText}>Compartilhou o {'\n'} app com 1 amigo</Text>
+            </View>           
+            <View>
+              <Text style={styles.activityPoints}>+70</Text>
+            </View>
+          </View>
+          <View
+              style={{
+                borderBottomColor: 'rgba(94,94,94,0.3)',
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                marginBottom: 10,
+              }}
+            />
+          <View style={styles.activityContainer}>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.activityDate}>09/07</Text>
+              <Text style={styles.activityText}>Visitou o shopping</Text>
+            </View>           
+            <View>
+              <Text style={styles.activityPoints}>+70</Text>
+            </View>
+          </View>
+          <TouchableOpacity style={[styles.moreButton, {backgroundColor: '#76B9D3'}]}>
+            <Text style={styles.extractButtonText}>ver extrato</Text>
+          </TouchableOpacity>
         </View>
       )}
     </ScrollView>
@@ -262,8 +358,9 @@ const styles = StyleSheet.create({
     height: 50,
   },
   balanceSection: {
+    flexDirection: 'column',
     backgroundColor: '#ECECEC',
-    padding: 40,
+    padding: 20,
     borderRadius: 50,
     margin: 20,
     justifyContent: 'center',
@@ -272,7 +369,6 @@ const styles = StyleSheet.create({
   balanceTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
     color: '#004D85',
     marginBottom: 25,
   },
@@ -395,33 +491,107 @@ const styles = StyleSheet.create({
   },
   activeToggleText: {
     color: '#004D85',
+    
+  },
+  activeToggleUnderline:{
+    height: 1.8,
+    width: "100%",
+    backgroundColor: "#004D85",
+    marginTop: 2
   },
   content: {
     backgroundColor: '#fff',
     padding: 20,
     borderRadius: 10,
   },
-  contentTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 10,
+  rankingImage:{
+    width: 80,
+    height: 80,
+    borderRadius: 50,
+    marginTop: 30,
+    borderColor: '#76B9D3',
+    borderWidth: 3,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 5,
+  },
+  rankingImageMiddle:{
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    borderColor: '#FE3131',
+    borderWidth: 3,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 5,
   },
   rankingItem: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
+    justifyContent: 'space-between',
   },
-  rankingImage: {
+  rankingNumber: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#E24443',
+    marginRight: 8,
+  },
+  rankingImageList: {
     width: 50,
     height: 50,
     borderRadius: 25,
     marginRight: 10,
   },
-  rankingText: {
+  rankingName: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#3C3A3A',
+  },
+  pointsLevel: {
     fontSize: 16,
   },
-  activityText: {
-    fontSize: 16,
+  moreButton: {
+    alignSelf: 'center',
+    backgroundColor: '#E24443',
+    padding: 7,
+    marginTop: 10,
+    borderRadius: 20,
+    justifyContent: 'center',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 5,
+  },
+  activityContent: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+  },
+  activityContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 10,
     marginBottom: 10,
   },
+  activityDate: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#E24443',
+  },
+  activityText: {
+    fontSize: 18,
+    marginBottom: 10,
+    marginLeft: 15,
+    color: '#3C3A3A'
+  },
+  activityPoints:{
+    color: '#E24443',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  
 });
