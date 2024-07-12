@@ -4,7 +4,7 @@ import CustomCheckbox from '../../componentes/SquareCheckbox';
 import CircleCheckbox from "../../componentes/CircleCheckbox";
 import Woman from '../../imagens/missoes/woman.jpg';
 import QrCode from '../../imagens/missoes/qr-code-scan-icon.svg';
-import Camera from '../../imagens/missoes/camera.svg';
+import QrCode2 from '../../imagens/missoes/qrCode2.svg';
 
 export default function TelaMissoes() {
     const [isVerifying, setIsVerifying] = useState(false);
@@ -36,18 +36,18 @@ export default function TelaMissoes() {
         { id: 1, text: "+5"},
         { id: 2, text: "+15"},
         { id: 3, text: "+25"},
-        { id: 4, text: "+10"},
-        { id: 5, text: "+10"},
-        { id: 6, text: "+10"}
+        { id: 4, text: "+50"},
+        { id: 5, text: "+50"},
+        { id: 6, text: "+50"}
     ]);
 
     const [dailyPoints, setDailyPoints] = useState([
         { id: 1, text: "+100"},
         { id: 2, text: "+50"},
         { id: 3, text: "+30"},
-        { id: 4, text: "+10"},
-        { id: 5, text: "+10"},
-        { id: 6, text: "+10"}
+        { id: 4, text: "+50"},
+        { id: 5, text: "+50"},
+        { id: 6, text: "+50"}
     ]);
     const [dailyCode, setDailyCode] = useState("");
 
@@ -174,7 +174,7 @@ export default function TelaMissoes() {
                                             <View style={styles.iconPosition}>
                                                 
                                                 <TouchableOpacity onPress={() => handleImageSend(task)}>
-                                                    <Camera style={styles.cameraIcon} />
+                                                    <QrCode2 width="20" height="20"/>
                                                 </TouchableOpacity>
                                             </View>
                                             </>
@@ -190,15 +190,7 @@ export default function TelaMissoes() {
                                         <CustomCheckbox isChecked={task.completed} onPress={() => handleTaskCheck(task)} />
                                         <Text style={styles.taskText}>{task.text}</Text>
                                         {!task.imageSent && (
-                                            <>
-                                            <Text style={styles.pointsText}>{dailyPoints.find((point) => point.id === task.id)?.text}</Text>
-                                            <View style={styles.iconPosition}>
-                                                
-                                                <TouchableOpacity onPress={() => handleImageSend(task)}>
-                                                    <Camera style={styles.cameraIcon} />
-                                                </TouchableOpacity>
-                                            </View>
-                                            </>
+                                            <Text style={styles.pointsText2}>{dailyPoints.find((point) => point.id === task.id)?.text}</Text>
                                         )}
                                     </View>
                                     <View style={styles.lineView} />
@@ -219,7 +211,7 @@ export default function TelaMissoes() {
                                             </Text>
                                             <View style={styles.iconPosition}>
                                                 <TouchableOpacity onPress={() => handleImageSend(task)}>
-                                                    <Camera style={styles.cameraIcon} />
+                                                    <QrCode2 width="20" height="20" />
                                                 </TouchableOpacity>
                                             </View>
                                             </>
@@ -235,14 +227,7 @@ export default function TelaMissoes() {
                                         <CustomCheckbox isChecked={task.completed} onPress={() => handleTaskCheck(task)} />
                                         <Text style={styles.taskText}>{task.text}</Text>
                                         {!task.imageSent && (
-                                            <>
-                                            <Text style={styles.pointsText}>{weeklyPoints.find((point) => point.id === task.id)?.text}</Text>
-                                            <View style={styles.iconPosition}>
-                                                <TouchableOpacity onPress={() => handleImageSend(task)}>
-                                                    <Camera style={styles.cameraIcon} />
-                                                </TouchableOpacity>
-                                            </View>
-                                            </>
+                                            <Text style={styles.pointsText2}>{weeklyPoints.find((point) => point.id === task.id)?.text}</Text>
                                         )}
                                     </View>
                                     <View style={styles.lineView} />
@@ -554,12 +539,19 @@ const styles = StyleSheet.create({
         left: 320,
     },
     cameraIcon: {
-        width: 27,
-        height: 27,
+        width: 5,
+        height: 5,
     },
     pointsText: {
         position: 'absolute',
         left: 280,
+        fontSize: 16,
+        color: '#E24443',
+        fontWeight: 'bold'
+    },
+    pointsText2: {
+        position: 'absolute',
+        left: 300,
         fontSize: 16,
         color: '#E24443',
         fontWeight: 'bold'
