@@ -14,18 +14,21 @@ export default function TelaPontos() {
   const [showRanking, setShowRanking] = useState(true);
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView>
+    <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>PONTOS</Text>
-        <View style={styles.profileSection}>
-          <View>
-            <Text style={styles.greeting}>Olá, Alana!</Text>
-            <Text style={styles.welcome}>Bem-vinda!</Text>
+          <Text style={styles.title}>PONTOS</Text>
+          <View style={styles.textoImagem}>
+              <View style={styles.comprimento}>
+                  <Text style={styles.headerText}>Olá, Alana!</Text>
+                  <Text style={styles.subHeaderText}>Bem-vinda!</Text>
+              </View>
+              <View style={styles.shadowContainer}>
+                  <Image style={styles.headerImage} source={require('../../imagens/perfil/woman.jpg')} />
+              </View>
           </View>
-          <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.profileImage} />
-        </View>
       </View>
-
+    <View style={styles.mainContainer}>
       <View style={styles.progressSection}>
         <View style={styles.progressTextContainer}>
           <Text style={[styles.progressText, { fontWeight: 'bold' }]}>Parabéns, Alana!</Text>
@@ -45,7 +48,7 @@ export default function TelaPontos() {
       <View style={styles.badgesSection}>
         <View style={styles.badgeSectionText}>
           <Text style={styles.badgesTitle}>Insígnias</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('TelaInsignias')}>
             <Text>Ver todas</Text>
           </TouchableOpacity>
         </View>
@@ -92,7 +95,7 @@ export default function TelaPontos() {
         </View>
         <View style={styles.benefits}>
           <View style={styles.benefitItem}>
-            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.benefitImage} />
+            <Image source={require('../../imagens/telaPontos/capsule.jpg')} style={styles.benefitImage} />
             <Text style={styles.benefitText}>Cápsula Nespresso</Text>
             <View style={styles.coin}>
               <Coin height='20' width='20' />
@@ -103,7 +106,7 @@ export default function TelaPontos() {
             </TouchableOpacity>
           </View>
           <View style={styles.benefitItem}>
-            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.benefitImage} />
+            <Image source={require('../../imagens/telaPontos/parking.jpg')} style={styles.benefitImage} />
             <Text style={styles.benefitText}>Estacionamento Free 1x</Text>
             <View style={styles.coin}>
               <Coin height='20' width='20' />
@@ -130,15 +133,15 @@ export default function TelaPontos() {
 
       {showRanking ? (
         <View style={styles.content}>
-          <View style={{flexDirection: 'row', gap: 6, justifyContent: 'center', alignItems: 'center', marginBottom: 40,}}>
-            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.rankingImage} />
-            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.rankingImageMiddle} />
-            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.rankingImage} />
+          <View style={styles.rankingImagesTop}>
+            <Image source={require('../../imagens/telaPontos/woman2.jpg')} style={styles.rankingImage} />
+            <Image source={require('../../imagens/perfil/woman.jpg')} style={styles.rankingImageMiddle} />
+            <Image source={require('../../imagens/telaPontos/man.jpg')} style={styles.rankingImage} />
           </View>
           <View style={styles.rankingItem}>
             <View style={{flexDirection: 'row', alignItems: 'center',}}>
             <Text style={styles.rankingNumber}>1</Text>
-            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.rankingImageList} />
+            <Image source={require('../../imagens/perfil/woman.jpg')} style={styles.rankingImageList} />
             <Text style={styles.rankingName}>Você</Text>
             </View>
             <View>
@@ -156,7 +159,7 @@ export default function TelaPontos() {
           <View style={styles.rankingItem}>
             <View style={{flexDirection: 'row', alignItems: 'center',}}>
             <Text style={styles.rankingNumber}>2</Text>
-            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.rankingImageList} />
+            <Image source={require('../../imagens/telaPontos/woman2.jpg')} style={styles.rankingImageList} />
             <Text style={styles.rankingName}>Gabriela</Text>
             </View>
            
@@ -175,7 +178,7 @@ export default function TelaPontos() {
           <View style={styles.rankingItem}>
             <View style={{flexDirection: 'row', alignItems: 'center',}}>
             <Text style={styles.rankingNumber}>3</Text>
-            <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.rankingImageList} />
+            <Image source={require('../../imagens/telaPontos/man.jpg')} style={styles.rankingImageList} />
             <Text style={styles.rankingName}>Gustavo</Text>
             </View>
             <View>
@@ -235,61 +238,86 @@ export default function TelaPontos() {
           </TouchableOpacity>
         </View>
       )}
+      </View>
+      </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  flex: 1,
+  backgroundColor: "#76B9D3"
   },
   header: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 225,
-    backgroundColor: '#76B9D3',
-    padding: 50,
-    marginBottom: 20,
+    flexDirection: "column",
+    alignItems: "center",
+    paddingTop: 52,
+    backgroundColor: "#76B9D3",
   },
-  headerText: {
-    color: '#004D85',
-    fontSize: 16,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    marginTop: 10,
+  textoImagem: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+    gap: 25
   },
-  profileSection: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10,
-    justifyContent: 'space-between',
+  comprimento: {
+    flexDirection: "column",
   },
-  greeting: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  welcome: {
-    color: '#fff',
-    fontSize: 16,
-  },
-  profileImage: {
+  headerImage: {
     width: 75,
     height: 75,
-    borderRadius: 50,
-    marginLeft: 10,
-    borderColor: '#fff',
-    borderWidth: 2,
+    borderRadius: 45.5,
+    borderWidth: 2,  
+    borderColor: 'white'
+  },
+  shadowContainer: {
+    paddingTop: 8,
+    marginLeft: 110,
+    marginRight: 30,
+    width: 91,
+    height: 91,
+    borderRadius: 45.5,
+    shadowColor: '#000',
+    shadowOffset: {
+        width: 0,
+        height: 8,
+    },
+    shadowRadius: 6,
+    elevation: 5,
+    shadowOpacity: 0.17
+  },
+  headerText: {
+    fontSize: 19,
+    fontWeight: "bold",
+    color: 'white',
+    marginLeft: 40
+  },
+  subHeaderText: {
+    fontSize: 17,
+    color: 'white',
+    marginLeft: 40
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#004d85",
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  mainContainer: {
+    flex: 1,
+    paddingVertical: 20,
+    backgroundColor: 'white',
+    borderTopLeftRadius: 60, // para aplicar border radius apenas nas pontas do container
+    borderTopRightRadius: 60
   },
   progressSection: {
     backgroundColor: '#fff',
     padding: 20,
-    borderRadius: 50,
+    borderRadius: 60,
     marginBottom: 20,
-    marginTop: 180,
+    // marginTop: 185,
   },
   progressTextContainer: {
     flexDirection: 'column',
@@ -434,7 +462,10 @@ const styles = StyleSheet.create({
   benefitImage: {
     flex: 1,
     justifyContent: 'flex-end',
-    borderRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    width: 'auto',
+    height: 'auto',
   },
   benefitText: {
     fontSize: 14,
@@ -503,6 +534,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20,
     borderRadius: 10,
+  },
+  rankingImagesTop: {
+    flexDirection: 'row',
+    gap: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 40,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
+    elevation: 5,
   },
   rankingImage:{
     width: 80,
@@ -593,5 +635,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
-  
 });

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function TelaMenu() {
@@ -60,14 +60,14 @@ export default function TelaMenu() {
           <Text style={styles.greeting}>Olá, Alana!</Text>
           <TouchableOpacity style={styles.menuButton}>
             <Icon name="user" size={24} color="#004D85" style={styles.icon} />
-            <Text style={styles.menuItem}>Meu perfil</Text>
+            <Text style={[styles.menuItem, {marginLeft: 13}]}>Meu perfil</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.menuButton}>
             <Icon name="sign-out" size={24} color="#004D85" style={styles.icon} />
             <Text style={styles.menuItem}>Sair do Viva</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.userImagePlaceholder} />
+         <Image style={styles.headerImage} source={require('../../imagens/perfil/woman.jpg')} />
       </View>
 
       <View style={styles.separator} />
@@ -147,21 +147,29 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   greeting: {
-    fontSize: 30,
+    fontSize: 23,
     fontFamily: 'System',
     fontWeight: 'bold', 
     color: '#E24443',
   },
+  headerImage: {
+    width: 75,
+    height: 75,
+    borderRadius: 45.5,
+    borderWidth: 2,  
+    borderColor: '#E24443',
+},
   menuButton: {
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 5,
   },
   menuItem: {
-    fontSize: 18,
+    fontSize: 15,
     color: '#004D85',
     fontFamily: 'System',
-    marginLeft: 10,
+    marginLeft: 8,
+    alignSelf: 'center',
   },
   userImagePlaceholder: {
     width: 100,
@@ -180,33 +188,35 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'column',
-    alignItems: 'flex-start',
     marginVertical: 20,
   },
   buttonsRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',    
   },
   button: {
     paddingVertical: 8,
     paddingHorizontal: 16,
     backgroundColor: '#f0f0f0',
     borderRadius: 5,
-    marginBottom: 10,
-    marginRight: 18, 
-    justifyContent: 'center',
+    marginBottom: 10, 
+    justifyContent: 'space-between',
     alignItems: 'center',
-    elevation: 10, 
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 5,
   },
   saibaText: {
-    fontSize: 24,
+    fontSize: 22,
     fontFamily: 'System',
     fontWeight: 'bold', 
     color: '#004D85',
     marginBottom: 15,
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 15,
     fontFamily: 'System',
     fontWeight: 'bold', 
     color: '#E24443',

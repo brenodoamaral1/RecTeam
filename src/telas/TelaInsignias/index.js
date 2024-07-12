@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+
+// svg
+import Cinema from '../../imagens/telaPontos/cinema.svg';
+import Food from '../../imagens/telaPontos/food.svg';
+import Cart from '../../imagens/telaPontos/cart.svg';
+import Perfume from '../../imagens/telaPontos/perfume.svg';
+import Coin from '../../imagens/telaPontos/coin.svg';
 
 export default function TelaInsignias() {
   const navigation = useNavigation();
@@ -28,7 +35,7 @@ export default function TelaInsignias() {
         </View>
 
         <View style={styles.profileContainer}>
-          <View style={styles.userImagePlaceholder} />
+          <Image style={styles.headerImage} source={require('../../imagens/perfil/woman.jpg')} />
           <View style={styles.userInfo}>
             <View style={styles.userRow}>
               <Text style={styles.userName}>Alana Tavares</Text>
@@ -44,21 +51,21 @@ export default function TelaInsignias() {
       <View style={styles.badgesContainer}>
         <View style={styles.row}>
           <View style={styles.badge}>
-            <FontAwesome name="film" size={32} color="#0876C6" />
+            <Cinema height='60' width='60' />
             <Text style={styles.badgeText}>Cinéfilo</Text>
           </View>
           <View style={styles.badge}>
-            <FontAwesome name="cutlery" size={32} color="#C90000" />
+            <Food height='60' width='60' />
             <Text style={styles.badgeText}>FoodLover</Text>
           </View>
           <View style={styles.badge}>
-            <FontAwesome name="shopping-cart" size={32} color="#BB1565" />
+            <Cart height='60' width='60' />
             <Text style={styles.badgeText}>Super Shopper</Text>
           </View>
         </View>
         <View style={styles.row}>
           <View style={styles.badge}>
-            <FontAwesome name="flask" size={32} color="#6CA313" />
+            <Perfume height='60' width='60' />
             <Text style={styles.badgeText}>Amante de Perfume</Text>
           </View>
           <View style={styles.badgeLocked}>
@@ -127,7 +134,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9F9F9',
     alignItems: 'center',
     paddingTop: 30,
-    paddingBottom: 20,
+    paddingBottom: 30,
     borderBottomLeftRadius: 60,
     borderBottomRightRadius: 60,
   },
@@ -135,7 +142,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
-    justifyContent: 'space-between',
+  },
+  headerImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 45.5,
+    borderWidth: 2,  
+    borderColor: 'white',
+    margin: 10,
+    borderWidth: 3,
+    borderColor: '#76B9D3',
   },
   backButton: {
     marginLeft: 0,
@@ -203,7 +219,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     backgroundColor: '#FFF',
-    borderRadius: 10,
+    borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
@@ -232,7 +248,7 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   badgeText: {
-    marginTop: 9,
+    marginTop: 5,
     fontSize: 13,
     color: '#3C3A3A',
     textAlign: 'center',
