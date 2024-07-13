@@ -265,7 +265,8 @@ export default function TelaMissoes() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#76B9D3"
+        backgroundColor: "#76B9D3",
+        marginBottom: 150,
     },
     header: {
         flexDirection: "column",

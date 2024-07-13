@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 // svg
 import TrofeuAzul from '../../imagens/telaPontos/trofeuAzul.svg';
@@ -12,6 +13,7 @@ import Coin from '../../imagens/telaPontos/coin.svg';
 
 export default function TelaPontos() {
   const [showRanking, setShowRanking] = useState(true);
+  const navigation = useNavigation();
 
   return (
     <ScrollView>
@@ -247,7 +249,7 @@ export default function TelaPontos() {
 const styles = StyleSheet.create({
   container: {
   flex: 1,
-  backgroundColor: "#76B9D3"
+  backgroundColor: "#76B9D3",
   },
   header: {
     flexDirection: "column",
@@ -534,6 +536,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20,
     borderRadius: 10,
+    paddingBottom: 120,
   },
   rankingImagesTop: {
     flexDirection: 'row',
@@ -599,7 +602,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: '#E24443',
     padding: 7,
-    marginTop: 10,
+    marginTop: 20,
     borderRadius: 20,
     justifyContent: 'center',
     shadowOffset: { width: 0, height: 4 },
@@ -611,6 +614,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20,
     borderRadius: 10,
+    paddingBottom: 120,
   },
   activityContainer: {
     flexDirection: 'row',

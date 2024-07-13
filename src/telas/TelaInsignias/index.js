@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     borderColor: '#76B9D3',
   },
   backButton: {
-    marginLeft: 0,
+    alignSelf: 'flex-end',
   },
   backButtonPlaceholder: {
     width: 28,

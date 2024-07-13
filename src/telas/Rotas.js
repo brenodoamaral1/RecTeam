@@ -17,6 +17,7 @@ import TelaMenu from './TelaMenu';
 import TelaMissoes from './TelaMissoes';
 import TelaPontos from './TelaPontos';
 import TelaInsignias from './TelaInsignias';
+import TelaLogin from './TelaLogin';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -88,6 +89,7 @@ const TabNavigator = () => {
           marginRight: 18,
           marginBottom: 25,
           marginTop: 10,
+          position: 'absolute',
         },
         tabBarIcon: ({ focused }) => {
           let Icon;
@@ -123,17 +125,6 @@ const TabNavigator = () => {
       })}
     >
       <Tab.Screen
-        name="TelaInsignias"
-        component={TelaInsignias}
-        options={{
-          title: '',
-          headerTransparent: true,
-          headerShown: false,
-          tabBarIcon: () => (null),
-          tabBarButton: () => null
-        }}
-      />
-      <Tab.Screen
         name="TelaMissoes"
         component={TelaMissoes}
         options={{
@@ -164,10 +155,38 @@ const TabNavigator = () => {
   );
 };
 
+const MainNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="TelaLogin"
+        component={TelaLogin}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="TabNavigator"
+        component={TabNavigator}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="TelaInsignias"
+        component={TelaInsignias}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 function Rotas() {
   return (
     <NavigationContainer>
-      <TabNavigator />
+      <MainNavigator />
     </NavigationContainer>
   );
 }
