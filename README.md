@@ -26,7 +26,7 @@ Gabriella Graciano de Souza<br/>
 
 ## Documentação 📄
 
-- [Figma](https://www.figma.com/design/zpJamDrK7lwvtRbsIG7NXr/Rede-Recife?node-id=11-14&t=PYIJgEym9iSxitc8-0)
+- [Figma](https://www.figma.com/design/DdQazTEmBIlEO8VXgFMSwx/Campus-Party-SP?t=BAIHlLq3TXuvYoLL-0)
 
 ## Tecnologias ⚙️
 
