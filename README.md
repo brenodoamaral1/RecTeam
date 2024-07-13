@@ -36,7 +36,6 @@ Gabriella Graciano de Souza<br/>
 - Express
 - Back4App
 - Postman
-- Python
 - Expo Go
 
 ## Instalação ⬇️
