@@ -75,6 +75,7 @@ npm install
 ### Passo 1: Iniciar o Servidor Expo
 No terminal, dentro da pasta do projeto, execute:
 ```bash
+cd frontend
 npx expo start
 ```
 
