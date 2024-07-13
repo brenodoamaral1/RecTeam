@@ -2,7 +2,7 @@
 
 ## Descrição ℹ️
 
-Plataforma mobile feita em React Native e Node.js para o Hackaton da Campus Party SP
+Plataforma mobile feita em React Native e Node.js para o Hackaton da Campus Party SP.
 
 A proposta do aplicativo é atualizar o sistema de benefícios do Shopping Center Norte em São Paulo, o Viva Center Norte que atualmente só possui cashback e alguns benefícios como cupons e promoções. O processo de cashback funciona a cada compra realizada apenas nas lojas participantes do Viva. 
 
