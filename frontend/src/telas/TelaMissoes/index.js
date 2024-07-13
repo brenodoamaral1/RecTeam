@@ -3,10 +3,14 @@ import { StyleSheet, View, Text, ScrollView, Image, TextInput, KeyboardAvoidingV
 import CustomCheckbox from '../../componentes/SquareCheckbox';
 import CircleCheckbox from "../../componentes/CircleCheckbox";
 import Woman from '../../imagens/missoes/woman.jpg';
+import Bk from '../../imagens/missoes/bk.svg';
+import Geek from '../../imagens/missoes/geek.svg';
 import QrCode from '../../imagens/missoes/qr-code-scan-icon.svg';
 import QrCode2 from '../../imagens/missoes/qrCode2.svg';
 
-export default function TelaMissoes() {
+export default function TelaMissoes({route}) { 
+    const { previsao } = route.params
+
     const [isVerifying, setIsVerifying] = useState(false);
     const [code, setCode] = useState("");
     const [isCodeSent, setIsCodeSent] = useState(false);
@@ -102,40 +106,12 @@ export default function TelaMissoes() {
                 </View>
             </View>
             <View style={styles.mainContainer}>
-                <View style={styles.flashMissionContainer}>
-                    <Text style={styles.flashMissionTitle}>Missão Flash</Text>
-                    <Text style={styles.flashMissionDescription}>Assista a um filme no cinema</Text>
-                    <Text style={styles.flashMissionPoints}>+200 pontos</Text>
-                    {isCodeSent ? (
-                        <Text style={styles.codeSentMessage}>Código enviado com sucesso!</Text>
-                    ) : isQRCodeScanned ? (
-                        <Text style={styles.codeSentMessage}>QR code escaneado com sucesso!</Text>
+            <Text style={styles.addTexto}>OFERTAS ESPECIAIS:</Text>
+                <View style={styles.adContainer}>
+                    {previsao === "Alimentos" ? (
+                        <Bk width="100%" height="100%" style={styles.adImage} />
                     ) : (
-                        <>
-                            {isVerifying ? (
-                                <View style={styles.verificationContainer}>
-                                    <TextInput
-                                        style={styles.codeInput}
-                                        placeholder="Insira o código"
-                                        placeholderTextColor={'#e24443'}
-                                        value={code}
-                                        onChangeText={setCode}
-                                    />
-                                    <TouchableOpacity style={styles.sendButton} onPress={handleSendCode}>
-                                        <Text style={styles.sendButtonText}>Enviar</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            ) : (
-                                <View style={styles.buttons}>
-                                    <TouchableOpacity style={styles.verifyButton} onPress={() => setIsVerifying(true)}>
-                                        <Text style={styles.verifyButtonText}>Verificar</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={styles.qrcodeButton} onPress={handleQRCodeScan} >
-                                        <QrCode width="20" height="20" />
-                                    </TouchableOpacity>
-                                </View>
-                            )}
-                        </>
+                        <Geek width="100%" height="100%" style={styles.adImage} />
                     )}
                 </View>
 
@@ -235,8 +211,45 @@ export default function TelaMissoes() {
                             ))}
                         </>
                 )}
-                
+
+                <View style={styles.flashMissionContainer}>
+                    <Text style={styles.flashMissionTitle}>Missão Flash</Text>
+                    <Text style={styles.flashMissionDescription}>Assista a um filme no cinema</Text>
+                    <Text style={styles.flashMissionPoints}>+200 pontos</Text>
+                    {isCodeSent ? (
+                        <Text style={styles.codeSentMessage}>Código enviado com sucesso!</Text>
+                    ) : isQRCodeScanned ? (
+                        <Text style={styles.codeSentMessage}>QR code escaneado com sucesso!</Text>
+                    ) : (
+                        <>
+                            {isVerifying ? (
+                                <View style={styles.verificationContainer}>
+                                    <TextInput
+                                        style={styles.codeInput}
+                                        placeholder="Insira o código"
+                                        placeholderTextColor={'#e24443'}
+                                        value={code}
+                                        onChangeText={setCode}
+                                    />
+                                    <TouchableOpacity style={styles.sendButton} onPress={handleSendCode}>
+                                        <Text style={styles.sendButtonText}>Enviar</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            ) : (
+                                <View style={styles.buttons}>
+                                    <TouchableOpacity style={styles.verifyButton} onPress={() => setIsVerifying(true)}>
+                                        <Text style={styles.verifyButtonText}>Verificar</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.qrcodeButton} onPress={handleQRCodeScan} >
+                                        <QrCode width="20" height="20" />
+                                    </TouchableOpacity>
+                                </View>
+                            )}
+                        </>
+                    )}
+                </View>
             </View>
+            
             <View style={styles.dailyCodeContainer}>
                 <Text style={styles.dailyCodeTitle}>#vemdeviva</Text>
                 <Text style={styles.dailyCodeDescription}>Insira o código de indicação e reivindique seu prêmio</Text>
@@ -255,6 +268,7 @@ export default function TelaMissoes() {
                     </TouchableOpacity>
                     </>
                 )}
+                
             </View>
         </View>
         </ScrollView>
@@ -266,7 +280,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#76B9D3",
-        marginBottom: 150,
+       
     },
     header: {
         flexDirection: "column",
@@ -289,6 +303,35 @@ const styles = StyleSheet.create({
         borderRadius: 45.5,
         borderWidth: 2,  
         borderColor: 'white'
+    },
+    addTexto:{
+        flexDirection: "row",
+        alignItems: "center",
+        color: "#F43737",
+        textAlign: "center",
+        fontWeight: "700",
+        fontSize: 18,
+        marginBottom: 2
+    },
+    adContainer: {
+        height: 165,
+        width: 320,
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        padding: 2,
+        marginBottom: 7,
+        marginLeft: 32,
+        marginRight: 20,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 8,
+        },
+        shadowRadius: 15,
+        elevation: 9,
+        shadowOpacity: 0.22
     },
     shadowContainer: {
         paddingTop: 8,
@@ -333,12 +376,13 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 60
     },
     flashMissionContainer: {
+        marginTop: 15,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: "#FED131",
         borderRadius: 10,
         padding: 10,
-        marginBottom: 20,
+        marginBottom: 10,
         marginLeft: 20,
         marginRight: 20,
         shadowColor: '#000',
@@ -559,6 +603,7 @@ const styles = StyleSheet.create({
     },
     dailyCodeContainer: {
         padding: 20,
+        paddingBottom: 110,
         backgroundColor: "#B1B1B1",
         flexDirection: "column",
         alignItems: "center",

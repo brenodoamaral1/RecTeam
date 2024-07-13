@@ -80,7 +80,7 @@ const TabNavigator = () => {
         tabBarShowLabel: false,
         tabBarStyle: {
           height: 70,
-          display: 'flex',
+          display: route.name === 'TelaLogin' ? 'none' : 'flex', 
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: '#E24443',
@@ -125,12 +125,34 @@ const TabNavigator = () => {
       })}
     >
       <Tab.Screen
+        name="TelaLogin"
+        component={TelaLogin}
+        options={{
+          title: '',
+          headerTransparent: true,
+          headerShown: false,
+          tabBarIcon: () => (null),
+          tabBarButton: () => null
+        }}
+      />
+      <Tab.Screen
         name="TelaMissoes"
         component={TelaMissoes}
         options={{
           title: '',
           headerTransparent: true,
           headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="TelaInsignias"
+        component={TelaInsignias}
+        options={{
+          title: '',
+          headerTransparent: true,
+          headerShown: false,
+          tabBarIcon: () => (null),
+          tabBarButton: () => null
         }}
       />
       <Tab.Screen
@@ -155,38 +177,10 @@ const TabNavigator = () => {
   );
 };
 
-const MainNavigator = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="TelaLogin"
-        component={TelaLogin}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="TabNavigator"
-        component={TabNavigator}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="TelaInsignias"
-        component={TelaInsignias}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack.Navigator>
-  );
-};
-
 function Rotas() {
   return (
     <NavigationContainer>
-      <MainNavigator />
+      <TabNavigator />
     </NavigationContainer>
   );
 }

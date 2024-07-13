@@ -1,21 +1,23 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
 
 export default function TelaMenu() {
+  const navigation = useNavigation(); // Usar o hook useNavigation
   const [appIsReady, setAppIsReady] = useState(true);
-  const [selectedButton, setSelectedButton] = useState(null); 
+  const [selectedButton, setSelectedButton] = useState(null);
   const [submenuContent, setSubmenuContent] = useState([]);
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
-      
+      // Lógica adicional se necessário
     }
   }, [appIsReady]);
 
   const handleButtonPress = (buttonName) => {
     if (selectedButton === buttonName) {
-      setSelectedButton(null); 
+      setSelectedButton(null);
       setSubmenuContent([]);
     } else {
       setSelectedButton(buttonName);
@@ -51,27 +53,31 @@ export default function TelaMenu() {
     }
   };
 
+  const handleLogout = () => {
+    navigation.navigate('TelaLogin'); // Navegar para a tela de login
+  };
+
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <Text style={styles.menuText}>MENU</Text>
-      
+
       <View style={styles.topSection}>
         <View style={styles.userInfo}>
           <Text style={styles.greeting}>Olá, Alana!</Text>
           <TouchableOpacity style={styles.menuButton}>
             <Icon name="user" size={24} color="#004D85" style={styles.icon} />
-            <Text style={[styles.menuItem, {marginLeft: 13}]}>Meu perfil</Text>
+            <Text style={[styles.menuItem, { marginLeft: 13 }]}>Meu perfil</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.menuButton}>
+          <TouchableOpacity style={styles.menuButton} onPress={handleLogout}>
             <Icon name="sign-out" size={24} color="#004D85" style={styles.icon} />
             <Text style={styles.menuItem}>Sair do Viva</Text>
           </TouchableOpacity>
         </View>
-         <Image style={styles.headerImage} source={require('../../imagens/perfil/woman.jpg')} />
+        <Image style={styles.headerImage} source={require('../../imagens/perfil/woman.jpg')} />
       </View>
 
       <View style={styles.separator} />
-      
+
       <View style={styles.buttonContainer}>
         <Text style={styles.saibaText}>Saiba o que fazer</Text>
         <View style={styles.buttonsRow}>
@@ -131,7 +137,7 @@ const styles = StyleSheet.create({
   menuText: {
     fontSize: 20,
     fontFamily: 'System',
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
     color: '#004D85',
     alignSelf: 'center',
     marginVertical: 10,
@@ -149,16 +155,16 @@ const styles = StyleSheet.create({
   greeting: {
     fontSize: 23,
     fontFamily: 'System',
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
     color: '#E24443',
   },
   headerImage: {
     width: 75,
     height: 75,
     borderRadius: 45.5,
-    borderWidth: 2,  
+    borderWidth: 2,
     borderColor: '#E24443',
-},
+  },
   menuButton: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -175,7 +181,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 100,
-    backgroundColor: '#ccc', 
+    backgroundColor: '#ccc',
     marginTop: -10,
     marginRight: 20,
   },
@@ -193,14 +199,14 @@ const styles = StyleSheet.create({
   buttonsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',    
+    justifyContent: 'space-between',
   },
   button: {
     paddingVertical: 8,
     paddingHorizontal: 16,
     backgroundColor: '#f0f0f0',
     borderRadius: 5,
-    marginBottom: 10, 
+    marginBottom: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
     shadowOffset: { width: 0, height: 4 },
@@ -211,14 +217,14 @@ const styles = StyleSheet.create({
   saibaText: {
     fontSize: 22,
     fontFamily: 'System',
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
     color: '#004D85',
     marginBottom: 15,
   },
   buttonText: {
     fontSize: 15,
     fontFamily: 'System',
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
     color: '#E24443',
   },
   selectedButton: {
