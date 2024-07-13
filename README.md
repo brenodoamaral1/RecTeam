@@ -27,6 +27,7 @@ Gabriella Graciano de Souza<br/>
 ## Documentação 📄
 
 - [Figma](https://www.figma.com/design/DdQazTEmBIlEO8VXgFMSwx/Campus-Party-SP?t=BAIHlLq3TXuvYoLL-0)
+- [GoogleDocs](https://docs.google.com/document/d/17QYBXooRstwOEa_M19g7oWmPFu5JKOu8PngPmUlHjzs/edit#heading=h.2m78wgbl8crv)
 
 ## Tecnologias ⚙️
 
