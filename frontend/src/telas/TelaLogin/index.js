@@ -121,10 +121,10 @@ const styles = StyleSheet.create({
   },
   logo: {
     justifyContent: 'center',
+    alignItems: 'center',
     alignSelf: 'center',
     height: 120,
     width: 77,
-    marginRight: 125
   },
   input: {
     backgroundColor: 'rgba(255, 255, 255, 1)',
